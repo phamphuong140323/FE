@@ -8,8 +8,7 @@ import { useGetCategorysQuery, useRemoveCategoryMutation } from "../../../api/ca
 
 const AdminCategory = () => {
     const { data: categorytData, error, isLoading } = useGetCategorysQuery();
-    const [removeCategory, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] =
-    useRemoveCategoryMutation();
+    const [removeCategory, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] = useRemoveCategoryMutation();
 
     const confirm = (id: any) => {
         removeCategory(id);
