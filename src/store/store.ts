@@ -6,6 +6,12 @@ import imagetintucApi, { ImagetintucReducer } from '@/api/imagetintuc';
 import commentsApi, { CommentReducer } from '@/api/comment';
 import tintucApi, { TintucReducer } from '@/api/tintuc';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import saleApi from "../api/sale/sale.api";
+import paymentApi from "../api/payment";
+
+
+
+
 import {
     FLUSH,
     PAUSE,
@@ -36,17 +42,19 @@ const rootReducer = combineReducers({
     [imagetintucApi.reducerPath]: ImagetintucReducer,
     [tintucApi.reducerPath]: TintucReducer,
     [commentsApi.reducerPath]: CommentReducer,
-    [categoryApi.reducerPath]:  categoryReducer,
+    [categoryApi.reducerPath]: categoryReducer,
     [contactApi.reducerPath]: contactReducer,
     [informationApi.reducerPath]: informationReducer,
     [userApi.reducerPath]: userReducer,
     [customerApi.reducerPath]: customerReducer,
     [roleApi.reducerPath]: roleReducer,
-    
+    [saleApi.reducerPath]: saleApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
+
 
     // [authApi.reducerPath]: authReducer
 })
-const middleware = [productApi.middleware, sizeApi.middleware ,imageProductApi.middleware,imagetintucApi.middleware, tintucApi.middleware, commentsApi.middleware, categoryApi.middleware, contactApi.middleware, informationApi.middleware, userApi.middleware, customerApi.middleware, roleApi.middleware]
+const middleware = [productApi.middleware, sizeApi.middleware, imageProductApi.middleware, imagetintucApi.middleware, tintucApi.middleware, commentsApi.middleware, categoryApi.middleware, contactApi.middleware, informationApi.middleware, userApi.middleware, customerApi.middleware, roleApi.middleware, paymentApi.middleware, saleApi.middleware]
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
     reducer: persistedReducer,
@@ -57,7 +65,7 @@ export const store = configureStore({
             },
         }).concat(...middleware),
 })
-export type RootState = ReturnType<typeof store.getState> 
+export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
 
