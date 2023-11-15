@@ -8,21 +8,20 @@ import { useGetInformationsQuery, useRemoveInformationMutation } from '../../../
 
 const AdminInformation = () => {
     const { data: informationData, error, isLoading } = useGetInformationsQuery();
-    const [removeInformation, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] =
-        useRemoveInformationMutation();
+    const [removeInfor, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] = useRemoveInformationMutation();
 
     const confirm = (id: any) => {
-        useRemoveInformationMutation(id);
+        removeInfor(id);
     };
-    const dataSource = informationData?.data.map(({ _id, title, email, phone, image, logo, address, nameStore }: IInformation) => ({
-        key: _id,
-        title,
-        email,
-        phone,
-        image,
-        logo,
-        address,
-        nameStore
+    const dataSource = informationData?.data?.map((information: IInformation) => ({
+        key: information._id,
+        title: information.title,
+        email: information.email,
+        phone: information.phone,
+        image: information.image,
+        logo: information.logo,
+        address: information.address,
+        nameStore: information.nameStore,
     }));
     const columns = [
         {

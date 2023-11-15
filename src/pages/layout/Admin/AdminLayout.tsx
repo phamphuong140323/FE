@@ -9,7 +9,9 @@ import {
   DeleteOutlined,
   FileImageOutlined,
    CommentOutlined,
-  ControlOutlined 
+  ControlOutlined,
+  MailOutlined,
+  BookOutlined 
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
@@ -70,9 +72,18 @@ const items: MenuItem[] = [
     ]),
   getItem(<Link to="/admin/comments">Comment</Link>, '28', <CommentOutlined />,
   ),
-  getItem(<Link to="/admin/category">Danh mục</Link>, '29', <DesktopOutlined />),
-  getItem(<Link to="/admin/contact">Contact</Link>, '30', <DesktopOutlined />),
-  getItem(<Link to="/admin/information">Thông tin</Link>, '31', <DesktopOutlined />),
+  getItem('Danh mục', 'sub20', <UnorderedListOutlined />, [
+    getItem(<Link to="/admin/category">List</Link>, '3', ),
+    getItem(<Link to="/admin/category/add">Add</Link>, '4'),
+  ]),
+  getItem('Thông tin', 'sub21', <BookOutlined />, [
+    getItem(<Link to="/admin/information">List</Link>, '3', ),
+    getItem(<Link to="/admin/information/add">Add</Link>, '4'),
+  ]),
+  getItem('Liên hệ', 'sub22', <MailOutlined />, [
+    getItem(<Link to="/admin/contact">List</Link>, '3', ),
+    getItem(<Link to="/admin/contact/add">Add</Link>, '4'),
+  ]),
   getItem('Customer', 'sub3', <UserOutlined />, [
     getItem(<Link to="/admin/customer">List</Link>, '32', ),
     getItem(<Link to="/admin/customer/add">Add</Link>, '33'),

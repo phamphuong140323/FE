@@ -8,19 +8,20 @@ import { useGetContactsQuery, useRemoveContactMutation } from '../../../api/cont
 
 const AdminContact = () => {
     const { data: contactData, error, isLoading } = useGetContactsQuery();
-    const [removeContact, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] =
-        useRemoveContactMutation();
+    const [removeContact, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] = useRemoveContactMutation();
 
     const confirm = (id: any) => {
         removeContact(id);
     };
-    const dataSource = contactData?.data.map(({ _id, firstName, email, phone, content }: IContact) => ({
-        key: _id,
-        firstName,
-        email,
-        phone,
-        content
+    const dataSource = contactData?.data?.map((contact: IContact) => ({
+        key: contact._id,
+        firstName: contact.firstName,
+        email: contact.email,
+        phone: contact.phone,
+        content: contact.content,
     }));
+    console.log(contactData)
+
     const columns = [
         {
             title: "Tên sản phẩm",

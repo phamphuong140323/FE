@@ -8,16 +8,15 @@ import { useGetCategorysQuery, useRemoveCategoryMutation } from "../../../api/ca
 
 const AdminCategory = () => {
     const { data: categorytData, error, isLoading } = useGetCategorysQuery();
-    const [removeCategory, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] =
-    useRemoveCategoryMutation();
+    const [removeCategory, { isLoading: isRemoveLoading, isSuccess: isRemoveSuccess }] = useRemoveCategoryMutation();
 
     const confirm = (id: any) => {
         removeCategory(id);
     };
-    const dataSource = categorytData?.data.map(({ _id, name, desciption }: ICategory) => ({
-        key: _id,
-        name,
-        desciption
+    const dataSource = categorytData?.data.map((category: ICategory) => ({
+        key: category._id,
+        name: category.name,
+        desciption: category.desciption
     }));
     const columns = [
         {

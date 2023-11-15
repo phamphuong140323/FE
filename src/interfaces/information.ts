@@ -3,8 +3,8 @@ export interface IInformation {
     title: string,
     email: string,
     phone: number,
-    image: any,
-    logo: any,
+    image: string,
+    logo: string,
     address: string,
     nameStore: string,
 }
