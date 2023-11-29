@@ -18,7 +18,6 @@ import ThemImageTinTuc from "./components/admin/imagetintuc/add";
 import ImageTinTuc from "./components/admin/imagetintuc/list";
 import ThemTinTuc from "./components/admin/tintuc/add";
 import DanhSachTinTuc from "./components/admin/tintuc/list";
-import SuaTinTuc from "./components/admin/tintuc/update";
 import UpdateImage from "./components/admin/imageProduct/UpdateImage";
 import AdminCategory from "./components/admin/Category";
 import CategoryAdd from "./components/admin/Category/add";
@@ -63,6 +62,7 @@ import Color from "./components/admin/color/list";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import Detailtintuc from "./components/admin/tintuc/detail-tintuc";
 
 
 // const isAuthenticated = (): boolean => {
@@ -194,9 +194,11 @@ export const routers = createBrowserRouter([
         element: <ThemTinTuc />,
       },
       {
-        path: "tintuc/:id",
-        element: <SuaTinTuc />,
+        path: "tintuc/detailtintuc/:id",
+        element: <Detailtintuc />,
       },
+      
+
       {
         path: "imagetintuc",
         element: <ImageTinTuc />,
