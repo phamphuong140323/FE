@@ -63,12 +63,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Detailtintuc from "./components/admin/tintuc/detail-tintuc";
+import NotFound from "./pages/layout/Client/NotFound";
 
 
 const isAuthenticated = (): boolean => {
-  // const userString = localStorage.getItem("user");
-  // const user = userString ? JSON.parse(userString) : {};
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : {};
+  // const user = JSON.parse(localStorage.getItem("user") || "");
   return user && user?.role?.role_name === "admin";
 };
 
@@ -313,6 +314,6 @@ export const routers = createBrowserRouter([
   },
   {
     path: "*",
-    element: "NotFound Page nhé",
+    element: <NotFound />,
   },
 ]);
