@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import LoadingOutlined from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -13,38 +13,46 @@ type FieldType = {
 };
 
 const Signin: React.FC = () => {
-    const { handleSubmit, register } = useForm<ISignin>();
-    const [signin, { isLoading }] = useSigninUserMutation();
-    const navigate = useNavigate();
-  
-    const onFinish = (data: ISignin) => {
-      signin(data)
-        .unwrap()
-        .then((res) => {
-          if (res && res.user && res.user.role) {
-            localStorage.setItem("user", JSON.stringify(res.user));
-            if (res.user.role.role_name === "user") {
-              message.success("Đăng nhập thành công");
-              navigate("/");
-              console.log(res.user);
-              console.log(localStorage);
-            } else if (res.user.role.role_name === "admin") {
-              message.success("Đăng nhập thành công với vai trò quản trị");
-              navigate("/");
-              console.log(res.user);
-            } else {
-              message.error("Bạn không có quyền truy cập trang này");
-              console.log(res.user.role.role_name);
-            }
+  const { handleSubmit, register } = useForm<ISignin>();
+  const [signin, { isLoading }] = useSigninUserMutation();
+  const navigate = useNavigate();
+
+  const onFinish = (data: ISignin) => {
+    signin(data)
+      .unwrap()
+      .then((res) => {
+        if (res && res.user && res.user.role) {
+          const user = res.user;
+          localStorage.setItem("user", JSON.stringify(user));
+          if (res.user?.role?.role_name === "user") {
+            message.success("Đăng nhập thành công");
+            navigate("/");
+          } else if (res.user?.role?.role_name === "admin") {
+            message.success("Đăng nhập thành công với vai trò quản trị");
+            navigate("/");
           } else {
-            message.error("Đăng nhập không thành công, tài khoản hoặc mật khẩu không chính xác");
+            message.error("Bạn không có quyền truy cập trang này");
+            console.log(res.user.role.role_name);
           }
-        });
+        } else {
+          message.error(
+            "Đăng nhập không thành công, tài khoản hoặc mật khẩu không chính xác"
+          );
+        }
+      });
+  };
+
+  useEffect(() => {
+    // Load lại trang chủ sau khi đăng nhập thành công và chuyển hướng đến trang chủ
+    const reloadHome = () => {
+      history.go(0);
     };
-  
-    const onFinishFailed = (errorInfo: any) => {
-      console.log("Failed:", errorInfo);
-    };
+
+    const user = localStorage.getItem("user");
+    if (user) {
+      reloadHome();
+    }
+  }, []);
 
   return (
     <>
