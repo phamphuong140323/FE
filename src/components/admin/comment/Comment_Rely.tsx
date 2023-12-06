@@ -1,9 +1,10 @@
 import { FaRegPaperPlane } from "react-icons/fa"
 import { SubmitHandler } from 'react-hook-form';
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, message } from "antd";
 import { Icomment } from "@/interfaces/comment";
 import { useParams } from "react-router-dom";
 import { useAddCommentMutation, useGetCommentQuery } from "../../../api/comment"
+import { useState } from "react";
 
 type commentType = {
   content: String;
@@ -15,12 +16,13 @@ const Comment_Rely = () => {
   const userString = localStorage.getItem('user');
   const userObject = JSON.parse(userString);
   const userId = userObject?._id;
-  const fullname = userObject.fullname;
+  const fullname = userObject?.fullname;
   console.log('UserId from localStorage:', userId);
   console.log('UserId from localStorage:', fullname);
-  const [addCustomer,  { isLoading: isAddingComment }] = useAddCommentMutation();
+  const [addCustomer, { isLoading: isAddingComment }] = useAddCommentMutation();
   const [form] = Form.useForm();
   const isLoggedIn = userId && fullname;
+  const [commentSuccess, setCommentSuccess] = useState(false);
   const onFinish: SubmitHandler<Icomment> = (values) => {
     if (userId) {
       values.productId = id;
@@ -31,18 +33,30 @@ const Comment_Rely = () => {
         .then((data) => {
           refetch();
           form.resetFields(['content']);
-         
+          setCommentSuccess(true); // Đặt state để hiển thị thông báo
+          message.success('Đã đăng bình luận thành công'); // Thông báo thành công
         })
         .catch((error) => {
           console.error('Lỗi khi thêm bình luận:', error);
         });
     } else {
       console.error('Không tìm thấy User Id.');
+      return (
+        <div>
+          <p className="text-base text-gray-800">Bạn cần đăng nhập để bình luận.</p>
+        </div>
+      );
     }
   };
 
   return (
     <>
+     {/* {commentSuccess && (
+        <div>
+          <p className="text-base text-green-600">Đã đăng bình luận thành công.</p>
+        </div>
+      )} */}
+     {isLoggedIn ? (
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -63,7 +77,7 @@ const Comment_Rely = () => {
             placeholder="Xin mời để lại bình luận, đánh giá"
           />
         </Form.Item>
-  
+
         <Form.Item wrapperCol={{ offset: 8, span: 16 }} className="ml-auto">
           <Button type="primary" danger htmlType="submit" className="flex items-center gap-1 px-3 rounded-lg">
             <i className="text-lg"><FaRegPaperPlane /></i>
@@ -71,6 +85,11 @@ const Comment_Rely = () => {
           </Button>
         </Form.Item>
       </Form>
+       ) : (
+        <div>
+          <p className="text-base text-gray-800">Bạn cần đăng nhập để bình luận.</p>
+        </div>
+      )}
       {commentData?.length ? (
         commentData.map((comment, index) => (
           (comment.productId === id) && (
@@ -79,17 +98,17 @@ const Comment_Rely = () => {
                 <span className="font-semibold text-base pb-5">{comment.fullname}</span>
                 <p className="text-sm text-gray-800">{comment.content}</p>
               </div>
-            </div> 
+            </div>
           )
         ))
       ) : (
         <div>
-          <td className="text-sm text-gray-800" colSpan={2}>Chưa có bình luận nào được thêm</td>
+          <p className="text-base text-gray-800">Chưa có bình luận nào được thêm</p>
         </div>
       )}
-    
-  </>
-  
+
+    </>
+
   )
 }
 

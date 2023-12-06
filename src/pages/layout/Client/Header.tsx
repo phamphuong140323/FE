@@ -46,8 +46,8 @@ const Header = () => {
   return (
     <>
       <div className="Header fixed z-40 shadow-2xl pt-1">
-        <header className="min-h-[100px] bg-gray-100 w-screen">
-          <div className="content-header min-h-[100px] py-2 flex flex-col md:flex-row items-center justify-evenly">
+        <header className="min-h-[100px] bg-gray-100 ">
+          <div className="content-header min-h-[100px] py-2 flex flex-col md:flex-row items-center justify-evenly mx-10">
             <div className="w-20 h-20 ">
               <Link to={"/"}>
                 {informationData?.data?.map((information: IInformation) => (
@@ -55,12 +55,12 @@ const Header = () => {
                 ))}
               </Link>
             </div>
-            <div className="navbar-menu-header hidden md:block">
+            <div className="navbar-menu-header hidden md:block mx-10">
               <ul className="flex items-center justify-center">
                 {listMenu.map((item, index) => (
                   <li className="mx-2" key={index}>
                     <Link
-                      className={`px-3 py-1 text-lg  font-medium hover:text-teal-500 ${
+                      className={`px-2 py-1 text-lg  font-medium hover:text-teal-500 ${
                         activeLink === item.path
                           ? "text-teal-500 transition-opacity"
                           : ""
@@ -74,7 +74,7 @@ const Header = () => {
                 ))}
               </ul>
             </div>
-            <div className="w-full md:w-80">
+            <div className="w-full md:w-80 ">
               <form
                 onSubmit={onSubmitSearch}
                 className={`search-header relative ml-auto  w-50 focus-within:w-80  h-10 border border-teal-700 bg-gray-300 group  flex items-center justify-around pl-2 rounded-3xl ${
@@ -100,24 +100,12 @@ const Header = () => {
                     <TiDelete className="text-xl text-teal-400" />
                   </span>
                 }
-                <button className="mx-4">
+                <button className="mx-1">
                   <SearchOutlined />
                 </button>
               </form>
             </div>
-            <div className="action-cart-heart md:flex items-center gap-10 hidden ">
-              <div className="heart-header">
-                <Link className="" to={"/account/wishlist"}>
-                  <i className="relative">
-                    <BsHeart className="heart-icon text-teal-400 text-3xl " />
-                    <div className="quatity-producst  -top-2 ml-6 absolute">
-                      <span className="bg-red-500 text-white rounded-full text-xs px-1 py-[2px]">
-                        99+
-                      </span>
-                    </div>
-                  </i>
-                </Link>
-              </div>
+            <div className="action-cart-heart md:flex items-center gap-10 hidden mx-6">
               <div className="heart-header">
                 <Link title="Cart" className="" to={"/cart"}>
                   <i className="relative">
