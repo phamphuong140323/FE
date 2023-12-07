@@ -18,7 +18,6 @@ import ThemImageTinTuc from "./components/admin/imagetintuc/add";
 import ImageTinTuc from "./components/admin/imagetintuc/list";
 import ThemTinTuc from "./components/admin/tintuc/add";
 import DanhSachTinTuc from "./components/admin/tintuc/list";
-import SuaTinTuc from "./components/admin/tintuc/update";
 import UpdateImage from "./components/admin/imageProduct/UpdateImage";
 import AdminCategory from "./components/admin/Category";
 import CategoryAdd from "./components/admin/Category/add";
@@ -60,15 +59,17 @@ import AddColor from "./components/admin/color/add";
 import UpdateColor from "./components/admin/color/update";
 import Color from "./components/admin/color/list";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import ForgotPassword from "./pages/layout/Users/ForgotPassword/forgotPassword";
+import Detailtintuc from "./components/admin/tintuc/detail-tintuc";
+import NotFound from "./pages/layout/Client/NotFound";
 
 
 const isAuthenticated = (): boolean => {
-  // const userString = localStorage.getItem("user");
-  // const user = userString ? JSON.parse(userString) : {};
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : {};
   return user && user?.role?.role_name === "admin";
 };
 
@@ -129,6 +130,10 @@ export const routers = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "forgotPassword",
+    element: <ForgotPassword />,
   },
   {
     path: "/admin",
@@ -192,9 +197,11 @@ export const routers = createBrowserRouter([
         element: <ThemTinTuc />,
       },
       {
-        path: "tintuc/:id",
-        element: <SuaTinTuc />,
+        path: "tintuc/detailtintuc/:id",
+        element: <Detailtintuc />,
       },
+      
+
       {
         path: "imagetintuc",
         element: <ImageTinTuc />,
@@ -311,6 +318,6 @@ export const routers = createBrowserRouter([
   },
   {
     path: "*",
-    element: "NotFound Page nhé",
+    element: <NotFound />,
   },
 ]);

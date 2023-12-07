@@ -10,8 +10,6 @@ const BannerCaption = () => {
         backgroundSize: "auto",
       }}
     >
-      <div className="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25"></div>
-
       <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-96 lg:items-center lg:px-48 lg:justify-end  w-screen">
         <div className="max-w-5xl text-center">
           <div className="text-4xl font-bold leading-6 text-gray-800 text-red-400">

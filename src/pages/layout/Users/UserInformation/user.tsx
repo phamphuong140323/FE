@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, Dropdown, Popover, Button, message } from "antd";
 import { SettingOutlined, LogoutOutlined } from "@ant-design/icons";
 import ChangePassword from "./changePassword";
@@ -7,10 +7,18 @@ const { Item, Divider } = Menu;
 
 const UserInformation: React.FC = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState(location.pathname);
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : {};
   const [showMenu, setShowMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(user?.role?.role_name === "admin");
+  }, [user]);
 
   const handleShowChangePassword = () => {
     setShowChangePassword(true);
@@ -44,10 +52,12 @@ const UserInformation: React.FC = () => {
   const handleProfileClose = () => {
     setShowProfile(false);
   };
+
   const formatDate = (dateString: string) => {
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+
   const profileFields = [
     { label: "Tên", value: user.name },
     { label: "Họ Và Tên", value: user.fullname },
@@ -55,22 +65,22 @@ const UserInformation: React.FC = () => {
     { label: "Ngày sinh", value: formatDate(user.ngaysinh) },
     // Thêm các trường thông tin người dùng khác vào đây
   ];
+
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Item key="profile">Hồ sơ</Item>
-      <Item key="changePassword" onClick={handleShowChangePassword}>
-        <span>
-          <SettingOutlined /> Đổi mật khẩu
-        </span>
-      </Item>
-      <Divider />
-      {user?.role?.role_name === "admin" ? (
-        <Item key="admin">
-          <Link to={location.pathname === "/admin" ? "/" : "/admin"}>
-            {location.pathname === "/admin" ? "Trang chủ" : "Trang Admin"}
+
+      {isAdmin && (
+        <Item key={location.pathname === "/" ? "admin" : "home"}>
+          <Link to={location.pathname === "/" ? "/admin" : "/"}>
+            {location.pathname === "/" ? "Trang Admin" : "Trang chủ"}
           </Link>
         </Item>
-      ) : null}
+      )}
+
+      <Item key="changePassword" onClick={handleShowChangePassword}>
+        <span>Đổi mật khẩu</span>
+      </Item>
       <Divider />
       <Item key="logout">
         <span>
@@ -79,6 +89,7 @@ const UserInformation: React.FC = () => {
       </Item>
     </Menu>
   );
+
   const profileContent = (
     <div>
       {profileFields.map((field, index) => (
@@ -110,9 +121,9 @@ const UserInformation: React.FC = () => {
                 src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                 className="h-10 w-10 rounded-full object-cover"
               />
-              <p className="ms-2 hidden text-left text-xs sm:block px-2">
-                <strong className="block font-medium">{user.name}</strong>
-                <span className="text-gray-500">{user.email}</span>
+              <p className="ms-2 hidden text-left text-xs sm:block ">
+                <strong className="block font-medium text-sm">{user.name}</strong>
+                {/* <span className="text-gray-500">{user.email}</span> */}
               </p>
             </button>
           </Dropdown>
