@@ -48,7 +48,7 @@ const AddProduct: React.FC = () => {
             price: products.price,
             image: img,
             description: products.description,
-            quantity: 10,
+            quantity: products.quantity,
             sale: products.sale,
             categoryId: products.categoryId,
             trang_thai: "active",
@@ -119,18 +119,8 @@ name="name"
                     </Select>
                 </Form.Item>
 
-                <Form.Item
-                    label="sale"
-                    name="sale"
-                    rules={[{ required: true, message: 'Please select a sale!' }]}
-                >
-                    <Select placeholder="Select a sale">
-                        {sale?.data?.map((sale: ISale) => (
-                            <Option key={sale._id} value={sale._id}>
-                                {sale.sale}
-                            </Option>
-                        ))}
-                    </Select>
+                <Form.Item label="Sale" name="sale">
+                    <InputNumber />
                 </Form.Item>
                 <Form.List name="colorSizes">
                     {(fields, { add, remove }) => (

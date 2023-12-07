@@ -15,7 +15,7 @@ const Comment_Rely = () => {
   const userString = localStorage.getItem('user');
   const userObject = JSON.parse(userString);
   const userId = userObject?._id;
-  const fullname = userObject.fullname;
+  const fullname = userObject?.fullname;
   console.log('UserId from localStorage:', userId);
   console.log('UserId from localStorage:', fullname);
   const [addCustomer,  { isLoading: isAddingComment }] = useAddCommentMutation();

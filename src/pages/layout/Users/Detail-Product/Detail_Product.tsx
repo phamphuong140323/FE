@@ -51,15 +51,21 @@ const Detail_Product = () => {
 
                     <div className="slider-text-content min-w-full  flex flex-col gap-5 mt-8 md:mt-10 md:flex-row justify-between  ">
                         {/* slider */}
-                        <div className="slider w-full md:w-2/5 relative overflow-hidden ">
-                            <ImagePriview width={80} listImage={product?.product.image} />
+                        <div className="slider w-full md:w-1/5 relative overflow-hidden ">
+                        <td className="whitespace-nowrap  text-gray-700 py-4 ">
+            <div className="items-center ">
+                <p className="text-xs lg:text-base md:text-xl flex ">
+                   <ImagePriview width={1000} listImage={product?.product.image} />
+                </p>
+            </div>
+        </td>
 
                             {/* sale */}
                             <div className="prd-sale absolute top-2 left-1 min-w-[75px]">
 
                                 <div className=" py-[2px] bg-pink-600 my-1">
                                     <span className=" m-2 block  rounded-full text-center text-sm font-medium text-white">
-                                        {product?.product.sale}
+                                        {product?.product.sale} %
                                     </span>
                                 </div>
                                 <div className="prd-sale py-[2px] bg-blue-300">
@@ -74,11 +80,11 @@ const Detail_Product = () => {
                         <div className="text-content flex-1">
                             <div className="info-price flex flex-col md:flex-row gap-5 items-center">
                                 <>
-                                    <h1 className="text-3xl font-normal">{product?.product.price}.vnđ</h1>
+                                    <h1 className="text-4xl font-normal">{product?.product.price - (product?.product.price * (product?.product.sale / 100))}.vnđ</h1>
                                     <div className="price-old">
                                         <h2 className="text-lg line-through">{product?.product.price}.vnđ</h2>
                                         <p className="text-sm font-medium text-[#fb317d]">
-                                            You Save: %
+                                            You Save: {product?.product.sale} %
                                         </p>
                                     </div>
                                 </>

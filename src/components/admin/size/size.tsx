@@ -71,7 +71,7 @@ return(
        <header className="flex items-center justify-between mb-4">
             <h2 className="text-2xl">Quản lý SIZE</h2>
             <Button type="primary" danger>
-                <Link to="/admin/product/add">Thêm sản phẩm</Link>
+                <Link to="/admin/size/add">Thêm sản SIZE</Link>
             </Button>
         </header>
       <Table dataSource={dataSource} columns={columns} />

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Form, Input, notification, Select, Row,Col,
-Space, InputNumber } from 'antd';
+import { Button, Form, Input, notification, Select, Row, Col, Space, InputNumber } from 'antd';
 import { useGetSizesQuery } from '@/api/sizes';
 import { useGetProductByIdQuery, useUpdateProductMutation } from '@/api/product';
 import { useGetCategorysQuery } from '@/api/category';
@@ -9,76 +8,58 @@ import { ICategory } from '@/interfaces/category';
 import { ISize } from '@/interfaces/size';
 import { IColor } from '@/interfaces/color';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { ISale } from '@/types';
 import { useGetColorsQuery } from '@/api/color';
 import UpLoand from '../../Image/UploadImageTintuc';
-import { useGetAllSalesQuery } from '@/api/sale/sale.api';
+
 
 const { Option } = Select;
 const UpdateProduct: React.FC = () => {
     const navigate = useNavigate();
     const [updateProduct] = useUpdateProductMutation(); 
     const { id } = useParams<{ id: string }>();
-    // Use the update mutation
-    const { data } = useGetProductByIdQuery(String(id)); // Fetch the existing product data
+    const { data } = useGetProductByIdQuery(String(id)); 
     const { data: size } = useGetSizesQuery();
     const { data: category } = useGetCategorysQuery();
     const { data: color } = useGetColorsQuery();
-    const { data: sale } = useGetAllSalesQuery();
-    console.log(data);
-    const [currentProductId, setCurrentProductId] = useState<string | null>(null)
-    
-    const [editedImg, setEditedImg] = useState<any>([]);
-  const [img, setImg] = useState<any>([]);
-  const resetEditedImg = () => {
-    setEditedImg([]);
-  };    
-  const handleImage = (url: string) => {
-    setImg([...img, url]);
-  };
-  const handleImageRemove = (url: string) => {
-    setImg((prevImg: any) => prevImg.filter((imageUrl: string) => imageUrl !== url));
-  };
-        
-      const { TextArea } = Input;
 
-    // Populate the form with the existing product data
+
+
+
+    const [currentImage, setCurrentImage] = useState<string[]>(data?.product.image || []);
+
+    const handleImage = (imageUrl: string) => {
+        setCurrentImage([...currentImage, imageUrl]);
+    };
+    
+    const handleImageRemove = (imageUrl: string) => {
+        setCurrentImage(currentImage.filter(image => image !== imageUrl));
+    };
+
+    const { TextArea } = Input;
+
     const [form] = Form.useForm();
     useEffect(() => {
         form.setFieldsValue({
             _id: data?.product._id,
             name: data?.product.name,
             price: data?.product.price,
-            image: data?.product.image,
+            image: currentImage,
             description: data?.product.description,
             quantity: data?.product.quantity,
             sale: data?.product.sale,
-            categoryId: data?.product.categoryId,
+            categoryId: data?.product.categoryId ? String(data.product.categoryId) : undefined,
             trang_thai: data?.product.trang_thai,
             colorSizes: data?.product.colorSizes?.map((colorSize: any) => ({
                 color: colorSize.color,
-                size: colorSize.sizes.map((size: any) => size.size)
-
+                size: colorSize.sizes?.map((size: any) => size.size)  
             }))
         })
-
-        
-   
     }, [ data ,form]);
-    useEffect(()=>{
-        setCurrentProductId(data?.product._id)
-        return () => {
-            resetEditedImg();
-          };
-    }
-    ,[data])
 
-
- 
     const onFinish = async (values: any) => {
         try {
-            const updateProducts = await updateProduct({  ...values ,_id:id}).unwrap();
-            // navigate('/admin/product');
+            console.log('Updating product with ID:', id);
+            const updateProducts = await updateProduct({  ...values ,_id:id, image: [currentImage] }).unwrap();
             notification.success({
                 message: 'Cập nhật thành công',
                 description: `The Size ${updateProducts.name} has been updated.`,
@@ -148,18 +129,8 @@ const UpdateProduct: React.FC = () => {
                     </Select>
                 </Form.Item>
 
-                <Form.Item
-                    label="sale"
-                    name="sale"
-                    rules={[{ required: true, message: 'Please select a sale!' }]}
-                >
-                    <Select placeholder="Select a sale">
-                        {sale?.data?.map((sale: ISale) => (
-                            <Option key={sale._id} value={sale._id}>
-                                {sale.sale}
-                            </Option>
-                        ))}
-                    </Select>
+                <Form.Item label="Sale" name="sale">
+                    <InputNumber />
                 </Form.Item>
                 <Form.List name="colorSizes">
                     {(fields, { add, remove }) => (
@@ -209,15 +180,14 @@ const UpdateProduct: React.FC = () => {
                
                 </Col>
                 <Col span={12}>
-                <Form.Item
-                    label="Image"
-                    name="image"
-                    // rules={[{ required: true, message: 'Please input your Image Product!' }]}
-                >
-                   {editedImg && editedImg.length > 0 && (
-              <UpLoand onImageUpLoad={handleImage} onImageRemove={handleImageRemove} img={editedImg} />
-            )}
-                </Form.Item>
+                    <Form.Item label="Image" name="image">
+                    <UpLoand 
+    onImageUpLoad={handleImage} 
+    onImageRemove={handleImageRemove} 
+    img={currentImage}
+/>
+                    </Form.Item>
+
                 
                     <Form.Item label="Description" name="description">
                         <TextArea rows={4} />
