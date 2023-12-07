@@ -40,7 +40,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ handleHideChangePasswor
       <Modal
         visible={visible}
         onCancel={handleCancel}
-        title="Đổi mật khẩu"
+        title={<h3 className="text-center">Đổi mật khẩu</h3>}
         footer={[
           <Button key="cancel" onClick={handleCancel}>
             Hủy
@@ -50,7 +50,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ handleHideChangePasswor
           </Button>,
         ]}
       >
-        <Form form={form}>
+        <Form form={form} layout="vertical">
           <Form.Item
             name="oldPassword"
             label="Mật khẩu hiện tại"

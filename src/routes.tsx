@@ -59,9 +59,10 @@ import AddColor from "./components/admin/color/add";
 import UpdateColor from "./components/admin/color/update";
 import Color from "./components/admin/color/list";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import ForgotPassword from "./pages/layout/Users/ForgotPassword/forgotPassword";
 import Detailtintuc from "./components/admin/tintuc/detail-tintuc";
 import NotFound from "./pages/layout/Client/NotFound";
 
@@ -69,7 +70,6 @@ import NotFound from "./pages/layout/Client/NotFound";
 const isAuthenticated = (): boolean => {
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : {};
-  // const user = JSON.parse(localStorage.getItem("user") || "");
   return user && user?.role?.role_name === "admin";
 };
 
@@ -130,6 +130,10 @@ export const routers = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "forgotPassword",
+    element: <ForgotPassword />,
   },
   {
     path: "/admin",
