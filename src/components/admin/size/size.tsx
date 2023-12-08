@@ -6,25 +6,32 @@ import {DeleteTwoTone, EditOutlined} from
 import { ISize } from '@/interfaces/size';
 import { useGetSizesQuery, useRemoveSizeMutation } from '@/api/sizes';
 import { Link } from 'react-router-dom';
+import { Modal } from 'antd';
 type Props = {};
 const Size = (props: Props) => {
     const { data: sizeData ,refetch} = useGetSizesQuery();
     const [removeSize] = useRemoveSizeMutation()
-    const handleSoftDelete = async (id: string) => {
-        try {
-            await removeSize(id);
-            notification.success({
-                message: 'Success',
-                description: 'size soft deleted successfully!',
-            });
-            refetch();
-        } catch (error) {
-            notification.error({
-                message: 'Error',
-                description: 'size to soft delete size',
-            });
-        }
-    }; 
+    const handleSoftDelete = (id: string) => {
+        Modal.confirm({
+            title: 'Bạn có muốn xóa size này?',
+            content: 'Hành động này không thể hoàn tác.',
+            onOk: async () => {
+                try {
+                    await removeSize(id);
+                    notification.success({
+                        message: 'Thành công',
+                        description: 'Size đã được xóa mềm thành công!',
+                    });
+                    refetch();
+                } catch (error) {
+                    notification.error({
+                        message: 'Lỗi',
+                        description: 'Không thể xóa mềm size',
+                    });
+                }
+            },
+        });
+    };
     const dataSource = sizeData?.map((size: any) => ({
         key: size._id,
         name: size.name,

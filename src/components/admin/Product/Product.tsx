@@ -6,7 +6,7 @@ import { IProduct } from '../../../interfaces/product';
 import { Link } from 'react-router-dom';
 import { ICategory } from '@/interfaces/category';
 import ImagePriview from '../../Image/ImagePriview';
-
+import { Modal } from 'antd';
 type Props = {
     products: IProduct[];
 };
@@ -16,24 +16,30 @@ const Product = (props: Props) => {
     const [softDeleteProduct] = useRemoveProductMutation();
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const handleSoftDelete = async (id: string) => {
-        setLoading(true);
-        try {
-            await softDeleteProduct(id);
-            notification.success({
-                message: 'Success',
-                description: 'Product soft deleted successfully!',
-            });
-            refetch();
-        } catch (error) {
-            notification.error({
-                message: 'Error',
-                description: 'Failed to soft delete product',
-            });
-        }finally {
-            setLoading(false);
-        }
-    }; 
+    const handleSoftDelete = (id: string) => {
+        Modal.confirm({
+            title: 'Bạn có muốn xóa sản phẩm này?',
+            content: 'Hành động này không thể hoàn tác.',
+            onOk: async () => {
+                setLoading(true);
+                try {
+                    await softDeleteProduct(id);
+                    notification.success({
+                        message: 'Thành công',
+                        description: 'Sản phẩm đã được xóa mềm thành công!',
+                    });
+                    refetch();
+                } catch (error) {
+                    notification.error({
+                        message: 'Lỗi',
+                        description: 'Không thể xóa mềm sản phẩm',
+                    });
+                } finally {
+                    setLoading(false);
+                }
+            },
+        });
+    };
     const handleSearch = (value: string) => {
         setSearchTerm(value);
     };

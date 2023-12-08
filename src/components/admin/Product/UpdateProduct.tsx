@@ -10,6 +10,7 @@ import { IColor } from '@/interfaces/color';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useGetColorsQuery } from '@/api/color';
 import UpLoand from '../../Image/UploadImageTintuc';
+import mongoose from 'mongoose';
 
 
 const { Option } = Select;
@@ -34,7 +35,7 @@ const UpdateProduct: React.FC = () => {
     const handleImageRemove = (imageUrl: string) => {
         setCurrentImage(currentImage.filter(image => image !== imageUrl));
     };
-
+    const isValidObjectId = (id: string) => mongoose.Types.ObjectId.isValid(id);
     const { TextArea } = Input;
 
     const [form] = Form.useForm();
@@ -47,29 +48,38 @@ const UpdateProduct: React.FC = () => {
             description: data?.product.description,
             quantity: data?.product.quantity,
             sale: data?.product.sale,
-            categoryId: data?.product.categoryId ? String(data.product.categoryId) : undefined,
+            categoryId: data?.product.categoryId ,
             trang_thai: data?.product.trang_thai,
             colorSizes: data?.product.colorSizes?.map((colorSize: any) => ({
                 color: colorSize.color,
-                size: colorSize.sizes?.map((size: any) => size.size)  
+                size: colorSize.sizes.map((size: any) => size.size)
+              // Change here
+
             }))
         })
     }, [ data ,form]);
 
     const onFinish = async (values: any) => {
         try {
-            console.log('Updating product with ID:', id);
-            const updateProducts = await updateProduct({  ...values ,_id:id, image: [currentImage] }).unwrap();
+        if (!isValidObjectId(values.categoryId)) {
+            throw new Error("Invalid categoryId");
+        }
+            const updateProducts = await updateProduct({  ...values ,_id:id, image: [currentImage] ,
+                colorSizes: values.colorSizes.map((colorSize: any) => ({
+                    color: colorSize.color,
+                    sizes: colorSize.size.map((size: string) => ({ size }))
+                }))
+             }).unwrap();
             notification.success({
                 message: 'Cập nhật thành công',
                 description: `The Size ${updateProducts.name} has been updated.`,
                 duration: 2,
             });
         } catch (error) {
-            console.error('Error updating Size:', error);
+            console.error('Error updating product:', error);
             notification.error({
                 message: 'Cập nhập thất bại',
-                description: 'Đã xảy ra lỗi khi cập nhật Kích thước.',
+                description: 'Đã xảy ra lỗi khi cập nhật sản phẩm',
                 duration: 2,
             });
         }

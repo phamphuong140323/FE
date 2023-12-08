@@ -49,7 +49,9 @@ const AddSize: React.FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item label="Quanlity"
-                name="quantity">
+                name="quantity"
+                rules={[{ required: true, message: 'Please input your Price Product!' }, { validator: (_, value) => (!value || !isNaN(Number(value))) ? Promise.resolve() : Promise.reject('Price must be a number') }]}
+                >
           <InputNumber />
         </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
