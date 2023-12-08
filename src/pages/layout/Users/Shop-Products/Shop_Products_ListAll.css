@@ -10,3 +10,13 @@
 .hot-sale-scroll::-webkit-scrollbar {
     display: none;
 }
+
+/* Thêm kiểu CSS để ẩn thanh cuộn trong Slider ở phần "Hot Sale" */
+.banner-products-new .slick-slider {
+    overflow: hidden;
+  }
+  
+  .banner-products-new .slick-list {
+    overflow: initial;
+  }
+  

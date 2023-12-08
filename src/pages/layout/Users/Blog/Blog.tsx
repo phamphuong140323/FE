@@ -25,7 +25,7 @@ const Blog = () => {
                                 <Link to={'/list-productsAll'}
                                     className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white transition bg-gray-900 border border-gray-900 rounded hover:shadow focus:outline-none focus:ring"
                                 >
-                                    Shop All
+                                    Mua Ngay
                                 </Link>
                             </div>
                         </div>

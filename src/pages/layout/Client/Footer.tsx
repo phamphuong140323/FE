@@ -88,7 +88,58 @@ const Footer = (props: Props) => {
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-3">
               <div>
-                <p className="font-bold text-gray-900 ">Information</p>
+                <p className="font-bold text-gray-900 ">Thông tin</p>
+
+                <ul className="mt-6 space-y-4 text-sm">
+                  <li>
+                    <a
+                      href="http://localhost:5173/blog/655f0dac30ab2481851a6500"
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+                     Chính sách bảo mật
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="http://localhost:5173/blog/655f0df630ab2481851a6503"
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+                 Hướng dẫn mua hàng
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="http://localhost:5173/blog/655f0e3830ab2481851a6506"
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+                   Chính sách đổi hàng
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="http://localhost:5173/blog/655f0e8b30ab2481851a650b"
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+               Chính sách vận chuyển
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="http://localhost:5173/list-productsAll"
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+                     Uy tín Chất lượng 
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="font-bold text-gray-900">{information.nameStore} </p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
@@ -96,7 +147,7 @@ const Footer = (props: Props) => {
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      About Us
+                      Đa dạng 
                     </a>
                   </li>
 
@@ -105,7 +156,7 @@ const Footer = (props: Props) => {
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Contact Us
+                     Uy tín 
                     </a>
                   </li>
 
@@ -114,81 +165,29 @@ const Footer = (props: Props) => {
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Terms & Conditions
-                    </a>
+Chất lượng                    </a>
                   </li>
-
                   <li>
                     <a
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Returns & Exchanges
+                     Phù hợp giá thành
                     </a>
                   </li>
-
                   <li>
                     <a
                       href="#"
                       className="text-gray-700 transition hover:opacity-75"
                     >
-                      Shipping & Delivery
+                     Đổi trả 1-1
                     </a>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <p className="font-bold text-gray-900">Account details</p>
-
-                <ul className="mt-6 space-y-4 text-sm">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      My Account
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      View Cart
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      My Wishlist
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      Order Status
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      Track My Order
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <p className="font-bold text-gray-900 mb-3">Safe payments</p>
+                <p className="font-bold text-gray-900 mb-3">HÌNH THỨC THANH TOÁN </p>
                 <div className="flex items-center gap-6">
                   <div>
                     <GPay></GPay>

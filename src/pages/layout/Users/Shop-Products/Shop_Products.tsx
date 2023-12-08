@@ -1,27 +1,38 @@
-import { Link, useNavigate } from "react-router-dom"
-import "./Shop_Products_ListAll.css"
-import Item from "../../../../components/item/item"
-import { IoIosArrowDropdown } from "react-icons/io"
-import { Tooltip } from "antd"
-import { BsSortDown, BsSortDownAlt } from "react-icons/bs"
-import { MdOutlineDiscount } from "react-icons/md"
-import { RiTShirtLine } from "react-icons/ri"
-import { PiStarThin } from "react-icons/pi"
-import { AiOutlineEye } from "react-icons/ai"
-import Loading from "../../../../components/action/Loading/Loading"
-import Comment from "@/components/admin/comment/Comment"
-import { useGetProductsQuery } from "@/api/product"
-import { IProduct } from "@/interfaces/product"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Item from '../../../../components/item/item';
+import { IoIosArrowDropdown } from 'react-icons/io';
+import { Tooltip } from 'antd';
+import { BsSortDown, BsSortDownAlt } from 'react-icons/bs';
+import { MdOutlineDiscount } from 'react-icons/md';
+import { RiTShirtLine } from 'react-icons/ri';
+import { PiStarThin } from 'react-icons/pi';
+import { AiOutlineEye } from 'react-icons/ai';
+import Loading from '../../../../components/action/Loading/Loading';
+import Comment from '@/components/admin/comment/Comment';
+import { useGetProductsQuery } from '@/api/product';
+import { IProduct } from '@/interfaces/product';
 import { useGetCategorysQuery } from '../../../../api/category';
 import { ICategory } from '../../../../interfaces/category';
-import React, { useEffect, useState } from 'react'
 const Shop_Products = () => {
     const { data: productData } = useGetProductsQuery();
-    console.log(productData);
     const { data: categoryData } = useGetCategorysQuery();
     const [sortBy, setSortBy] = useState('asc');
     const handleSortBy = (type: 'asc' | 'desc') => {
         setSortBy(type);
+    };
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4, // Điều chỉnh số lượng slide hiển thị
+        slidesToScroll: 1,
+        autoplay: true,        // Tự động chạy slider
+        autoplaySpeed: 3000,    // Đặt thời gian chờ giữa các slide (tính bằng mili giây)
+        arrows: false,         // Ẩn thanh lên xuống trái phải
     };
     return (
         <>
@@ -35,12 +46,12 @@ const Shop_Products = () => {
                             <ul className="flex items-center gap-2">
                                 <Link to={"/"}>
                                     <li className="underline underline-offset-4 hover:text-[#17c6aa] ">
-                                        Home
+                                        Trang Chủ
                                     </li>
                                 </Link>
                                 <li>/</li>
                                 <li className=" hover:text-[#17c6aa] ">
-                                    List Products All
+                                  Sản phẩm 
                                 </li>
                             </ul>
                         </div>
@@ -48,16 +59,14 @@ const Shop_Products = () => {
                         <div className="banner-products-new">
                             <div className="content-banner bg-gradient-to-t from-white to-teal-500 p-4 rounded-lg my-10 ">
                                 <h1 className="text-new-products uppercase text-4xl font-black text-white">Hot Sale</h1>
-                                <div className="list-new-products hot-sale-scroll p-5 overflow-x-auto  ">
-                                    <div className="content-list-new-products w-max flex gap-4 ">
-                                        <div className="content-list-new-products   grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5"> {/* Đặt kích thước cho nội dung bên trong */}
-                                            {productData?.products.map((product: IProduct, index: any) => (
-                                                <div className="w-full">
-                                                    <Item product={product} key={index} />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                                <div className="list-new-products hot-sale-scroll p-8 overflow-x-auto  ">
+                                    <Slider {...settings}>
+                                        {productData?.products.map((product: IProduct, index: any) => (
+                                            <div key={index}>
+                                                <Item product={product} />
+                                            </div>
+                                        ))}
+                                    </Slider>
                                 </div>
                             </div>
                         </div>
@@ -120,38 +129,28 @@ const Shop_Products = () => {
                                                 <i><IoIosArrowDropdown /></i>
                                             </div>
                                         </Tooltip>
-                                    </div>
-                                    <h1 className="font-semibold text-lg text-[#4a4a4a] my-3">Sorted by</h1>
+                                        <div className="sorted-by flex flex-wrap gap-3 cursor-pointer overflow-x-auto">
 
-                                    <div className="sorted-by flex flex-wrap gap-3 cursor-pointer overflow-x-auto">
+                                            <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
+                                                <div className="btn-option High-Low price flex items-center gap-1" onClick={() => handleSortBy('asc')}>
+                                                    <i className="text-lg"><BsSortDown /></i>
+                                                    <button className="text-xs">Giá sản phẩm giảm dần</button>
+                                                </div>
 
-                                        <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
-                                            <div className="btn-option High-Low price flex items-center gap-1" onClick={() => handleSortBy('asc')}>
-                                                <i className="text-lg"><BsSortDown /></i>
-                                                <button className="text-xs">Giá sản phẩm giảm dần</button>
                                             </div>
-
-                                        </div>
-                                        {/* price */}
-                                        <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
-                                            <div className="btn-option High-Low price flex items-center gap-1"  onClick={() => handleSortBy('desc')}>
-                                                <i className="text-lg"><BsSortDownAlt /></i>
-                                                <button className="text-xs">Giá sản phẩm tăng dần</button>
+                                            {/* price */}
+                                            <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
+                                                <div className="btn-option High-Low price flex items-center gap-1" onClick={() => handleSortBy('desc')}>
+                                                    <i className="text-lg"><BsSortDownAlt /></i>
+                                                    <button className="text-xs">Giá sản phẩm tăng dần</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        {/* Hot  */}
-                                        <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border "
-                                        >
-                                            <div className="btn-option High-Low price flex items-center gap-1">
-                                                <i className="text-lg"><MdOutlineDiscount /></i>
-                                                <button className="text-xs">Hot promotion</button>
-                                            </div>
-                                        </div>
-                                        {/* New */}
-                                        <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
-                                            <div className="btn-option High-Low price flex items-center gap-1">
-                                                <i className="text-lg"><RiTShirtLine /></i>
-                                                <button className="text-xs">New Products</button>
+                                            {/* New */}
+                                            <div className="list-sorted-by flex flex-col md:flex-row gap-2   px-3 py-2 rounded-lg border ">
+                                                <div className="btn-option High-Low price flex items-center gap-1">
+                                                    <i className="text-lg"><RiTShirtLine /></i>
+                                                    <button className="text-xs">Sản Phẩm Mới</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -166,11 +165,6 @@ const Shop_Products = () => {
                                         .map((product: IProduct, index: any) => (
                                             <div className="w-full">  <Item product={product} key={index} /></div>))}
                                 </div>
-                            </div>
-                            <div className="text-viewMore w-full flex justify-center my-10">
-                                <button className="text-sm text-gray-700 py-2 px-20 rounded-xl view-more-shadow" >
-                                    View More Products
-                                </button>
                             </div>
                         </div>
 

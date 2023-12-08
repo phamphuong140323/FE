@@ -15,10 +15,7 @@ import ImagePriview from '../../../../components/Image/ImagePriview';
 const Detail_Product = () => {
     const { id } = useParams<{ id: string }>(); // Get the product id from the URL parameters
     const { data: product, isLoading } = useGetProductByIdQuery(String(id));
-
-
     if (isLoading) return <div>Loading...</div>;
-
     return (
         <>
 
@@ -29,7 +26,7 @@ const Detail_Product = () => {
                         <ul className="flex items-center gap-2">
                             <Link to={"/"}>
                                 <li className="underline underline-offset-4 hover:text-[#17c6aa] ">
-                                    Home
+                                  Trang Chủ
                                 </li>
                             </Link>
                             <li className="underline underline-offset-4 hover:text-[#17c6aa] ">
@@ -70,7 +67,7 @@ const Detail_Product = () => {
                                 </div>
                                 <div className="prd-sale py-[2px] bg-blue-300">
                                     <span className=" m-2 block  rounded-full text-center text-sm font-medium text-white">
-                                        NEW
+                                      Mới
                                     </span>
                                 </div>
                             </div>
@@ -170,16 +167,16 @@ const Detail_Product = () => {
                                 <i className="text-4xl">
                                     <FcConferenceCall />
                                 </i>
-                                <span>24/7 Support</span>
+                                <span>Hỗ trợ :24/7</span>
                             </div>
                             <div className="item">
-                                <span>Use promocode FOXIC to get 15% discount!t</span>
+                                <span>Mua hàng trực tuyến tiện lợi nhanh gọn</span>
                             </div>
                             <div className="item flex items-center">
                                 <i className="text-4xl">
                                     <TbTruckDelivery />
                                 </i>
-                                <span>Fast Shipping</span>
+                                <span>Miễn phí vận chuyển </span>
                             </div>
                         </div>
                         {/* Mô tả */}
@@ -200,61 +197,6 @@ const Detail_Product = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Đánh giá */}
-                    {/* <div className="rating-user">
-                        <h1 className="my-5 text-xl font-medium">Đánh giá và Nhận xét </h1>
-                        <div className="shadow-rating-user  min-h-[200px] w-full rounded-lg p-5 ">
-                            <div className="content-rating min-h-[200px]  border-2 border-gray-300 rounded-2xl flex items-center">
-                                <div className="rating-big border-r-2 p-2 text-center w-1/3 ">
-                                    <p> Đánh giá và nhận xét</p>
-                                </div>
-                                <div className="rating-big-item w-full">
-
-
-                                </div>
-                            </div>
-                            button đánh giá
-                            <div className="button-rating-and-commnet mt-5 w-full mx-auto flex justify-center items-center ">
-                                <button className="btn-rating-and-commnet text-base bg-[#17c6aa] text-white hover:bg-black py-2 px-20 rounded-xl">
-                                    Đánh giá ngay
-                                </button>
-                            </div>
-                            user-rating và đánh giá
-                            <div className="user-rating-evaluate ">
-                                <div className="user-rating-evaluate-item mt-5">
-                                    <div className="flex items-center gap-3">
-                                        <div className="user-rating-evaluate-item-img w-8 h-8">
-
-                                        </div>
-                                        <span className="font-semibold text-base">Đỗ Thành Long</span>
-                                    </div>
-
-                                    <div className="user-rating-evaluate-item-content ml-10">
-
-                                        <div className="rating-star bg-blue-gray-50 p-2 rounded-lg">
-                                            <div className="flex items-center h-8 ">
-                                                <span className="font-semibold text-sm">Đánh giá: </span>
-                                                <i className="flex items-center ">  tỷ56tyr4e</i>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <span className=" font-semibold text-sm">Nhận xét: </span>
-                                                <p className="flex items-center text-xs">Sản phẩm rất là ok</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-
-                          
-                        </div>
-
-
-
-                    </div> */}
                     {/* Coment user */}
                     <div className="comment">
                         <Comment />

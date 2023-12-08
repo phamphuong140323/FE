@@ -65,6 +65,7 @@ import { Navigate } from "react-router-dom";
 import ForgotPassword from "./pages/layout/Users/ForgotPassword/forgotPassword";
 import Detailtintuc from "./components/admin/tintuc/detail-tintuc";
 import NotFound from "./pages/layout/Client/NotFound";
+import Detail_category from "./pages/layout/Users/List-Category/detail-category";
 
 
 const isAuthenticated = (): boolean => {
@@ -107,6 +108,10 @@ export const routers = createBrowserRouter([
       {
         path: "/products/:id",
         element: <Detail_Product />,
+      },
+      {
+        path: "/category/:id",
+        element: <Detail_category />,
       },
 
       {

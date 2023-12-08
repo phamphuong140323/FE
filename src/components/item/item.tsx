@@ -52,22 +52,16 @@ const Item = ({ buttonAdd, product, icon, infoProduct = true }: Props) => {
                             </span>   </div>
                         <div className="py-[2px] bg-[#33c7fd]">
                             <span className=" m-1 block  rounded-full text-center text-sm font-medium text-white">
-                                New
+                                Mới
                             </span>     </div>
 
                     </div>
                     <div className="prd-circle-labels absolute flex flex-col top-1 right-1 ">
                         <span className="eye bg-white flex justify-center items-center rounded-full shadow-md mt-2  cursor-pointer">
-                            <i className="icon-eye text-2xl p-1 ">
-                                <span>
-                                    <AiTwotoneHeart />
-                                </span>
-                            </i>
-                        </span>
-                        <span className="eye bg-white flex justify-center items-center rounded-full shadow-md mt-2  cursor-pointer">
                             <i className="icon-eye text-2xl p-1   ">
                                 <span>
-                                    <AiFillEye />
+                                    <AiFillEye  />
+                                    
                                 </span>
                             </i>
                         </span>
@@ -84,7 +78,6 @@ const Item = ({ buttonAdd, product, icon, infoProduct = true }: Props) => {
                                     <li>
                                     <select name="color" id="color">
                                                 {product?.colorSizes.map((colorSize) =>
-                                                    // <option key={colorSize._id} value={colorSize.color}>{colorSize.color}</option>
                                                     <option className={`text-${colorSize.color}-500`}></option>
                                                 )}
                                             </select>

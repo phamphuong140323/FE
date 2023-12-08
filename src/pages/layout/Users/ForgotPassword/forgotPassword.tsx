@@ -33,7 +33,7 @@ function ForgotPassword() {
   }, [counting, remainingTime]);
 
   const handleStartCountdown = () => {
-    setRemainingTime(10);
+    setRemainingTime(59);
     setCounting(true);
   };
 
