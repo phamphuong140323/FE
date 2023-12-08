@@ -1,29 +1,36 @@
-import React from 'react'
+import React from 'react';
 import { useGetCategorysQuery } from '../../../../api/category';
 import { ICategory } from '../../../../interfaces/category';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const ListCategory = () => {
-    const { data: categoryData } = useGetCategorysQuery();
-    return (
-        <div>
-            <div className='h-20'></div>
-            <div className='flex my-10 grid grid-rows-2 grid-flow-col gap-4 w-3/4 '>
-                {
-                    categoryData?.data?.map((category: ICategory) => (
-                        <div key={category._id}>
+  const { data: categoryData } = useGetCategorysQuery();
 
-                            <Link to={`/category/${category._id}`}>
-                                <img alt="" src={category.image} className="w-[300px] h-[180px]" />
-                                <div className='text-2xl'>{category.name}</div>
-                            </Link>
-
-                        </div>
-
-                    ))}
+  return (
+    <div className="flex flex-wrap my-10">
+      {categoryData?.data?.map((category: ICategory) => (
+        <div key={category._id} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+          <div className="border rounded-lg overflow-hidden">
+            <Link to={`/category/${category._id}`}>
+              <img alt={category.name} src={category.image} className="w-full h-[180px] object-cover" />
+            </Link>
+            <div className="p-4">
+              <h3 className="text-xl font-semibold mb-2">
+                <Link to={`/category/${category._id}`}>{category.name}</Link>
+              </h3>
+              <Link to={`/category/${category._id}`} className="text-red-500 hover:font-bold hover:text-red-600">
+                Chi Tiết Danh Mục
+              </Link>
+              <div className="mt-2">
+                <span className="text-sm font-medium text-gray-500">Số sản phẩm: </span>
+                <span className="text-sm">7</span>
+              </div>
             </div>
+          </div>
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default ListCategory
+export default ListCategory;

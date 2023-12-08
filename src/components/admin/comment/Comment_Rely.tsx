@@ -51,11 +51,6 @@ const Comment_Rely = () => {
 
   return (
     <>
-     {/* {commentSuccess && (
-        <div>
-          <p className="text-base text-green-600">Đã đăng bình luận thành công.</p>
-        </div>
-      )} */}
      {isLoggedIn ? (
       <Form
         name="basic"

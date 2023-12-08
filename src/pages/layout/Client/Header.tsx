@@ -86,7 +86,7 @@ const Header = () => {
                   type="text"
                   name=""
                   id=""
-                  placeholder="Search..."
+                  placeholder="Tìm kiếm ..."
                   ref={inputRef}
                   value={valueSearch}
                   onChange={(e) => setValueSearch(e.target.value)}
