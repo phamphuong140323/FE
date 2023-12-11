@@ -60,41 +60,22 @@ const Item = ({ buttonAdd, product, icon, infoProduct = true }: Props) => {
                         <span className="eye bg-white flex justify-center items-center rounded-full shadow-md mt-2  cursor-pointer">
                             <i className="icon-eye text-2xl p-1   ">
                                 <span>
-                                    <AiFillEye  />
-                                    
+                                    <AiFillEye />
+
                                 </span>
                             </i>
                         </span>
-                        <div className="color-palette bg-white flex flex-col justify-center items-center w-8 rounded-full shadow-md mt-2 cursor-pointer">
-                            <i className="icon-palette  ">
-                                <img
-                                    src="https://play-lh.googleusercontent.com/fn03mcSzK10OdPq_eio_Buh7BXiN8TNOGZPHHCnjtPyynK9kJhkdlbqDd0o_vZrIIw=w240-h480-rw"
-                                    className="w-full rounded-full"
-                                    alt=""
-                                />
+                        <span className="eye bg-white flex justify-center items-center rounded-full shadow-md mt-2  cursor-pointer">
+                            <i className="icon-eye text-2xl p-1   ">
+                                <span>
+                                    <AiTwotoneHeart />
+
+                                </span>
                             </i>
-                            <div className="list-color">
-                                <ul className="flex flex-col gap-3">
-                                    <li>
-                                    <select name="color" id="color">
-                                                {product?.colorSizes.map((colorSize) =>
-                                                    <option className={`text-${colorSize.color}-500`}></option>
-                                                )}
-                                            </select>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        </span>
+
                     </div>
-                    <ul className="list-options color-swatch absolute bottom-1 left-1 ">
-                        <li className=" w-10 h-10 mt-1 rounded-full hover:outline-2 hover:outline-teal-400 outline outline-1 cursor-pointer overflow-hidden  ">
-                            <img
-                                src="https://play-lh.googleusercontent.com/fn03mcSzK10OdPq_eio_Buh7BXiN8TNOGZPHHCnjtPyynK9kJhkdlbqDd0o_vZrIIw=w240-h480-rw"
-                                className="w-full h-full object-contain p-1"
-                                alt="Color Name"
-                            />
-                        </li>
-                    </ul>
+
                 </div>
                 <div className="prd-tag ">
                     <div className="prd-info">
@@ -125,12 +106,12 @@ const Item = ({ buttonAdd, product, icon, infoProduct = true }: Props) => {
                             </h2>
                             <div className="mt-1 prd-action text-center btn-add  ">
                                 <form action="#">
-                                     <Link to={`/products/${product?._id}`}>
-                                     <button className="btn js-prd-addtocart text-white bg-[#17c6aa] hover:bg-[#1b1a1a] rounded-sm px-4 py-2 font-semibold ">
-                                       Chi tiết sản phẩm
-                                    </button>
+                                    <Link to={`/products/${product?._id}`}>
+                                        <button className="btn js-prd-addtocart text-white bg-[#17c6aa] hover:bg-[#1b1a1a] rounded-sm px-4 py-2 font-semibold ">
+                                            Chi tiết sản phẩm
+                                        </button>
                                     </Link>
-                                  
+
                                 </form>
                             </div>
                         </div>

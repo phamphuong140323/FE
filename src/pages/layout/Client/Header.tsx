@@ -55,7 +55,7 @@ const Header = () => {
                 ))}
               </Link>
             </div>
-            <div className="navbar-menu-header hidden md:block mx-10">
+            <div className="navbar-menu-header hidden md:block ">
               <ul className="flex items-center justify-center">
                 {listMenu.map((item, index) => (
                   <li className="mx-2" key={index}>
@@ -110,6 +110,18 @@ const Header = () => {
                 <Link title="Cart" className="" to={"/cart"}>
                   <i className="relative">
                     <BsFillBagCheckFill className="heart-icon text-teal-400 text-3xl" />
+                    <div className="quatity-producst  -top-2 ml-6 absolute">
+                      <span className="bg-red-500 text-white rounded-full text-xs px-1 py-[2px]">
+                        99+
+                      </span>
+                    </div>
+                  </i>
+                </Link>
+              </div>
+              <div className="heart-header">
+                <Link title="Cart" className="" to={"/cart"}>
+                  <i className="relative">
+                    <BsHeart className="heart-icon text-teal-400 text-3xl" />
                     <div className="quatity-producst  -top-2 ml-6 absolute">
                       <span className="bg-red-500 text-white rounded-full text-xs px-1 py-[2px]">
                         99+
