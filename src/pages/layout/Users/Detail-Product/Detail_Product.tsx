@@ -13,24 +13,21 @@ import { useEffect, useState } from "react";
 import { useGetProductByIdQuery } from "@/api/product";
 import ImagePriview from '../../../../components/Image/ImagePriview';
 const Detail_Product = () => {
-    const { id } = useParams<{ id: string }>(); // Get the product id from the URL parameters
+    const { id } = useParams<{ id: string }>();
     const { data: product, isLoading } = useGetProductByIdQuery(String(id));
     if (isLoading) return <div>Loading...</div>;
     return (
         <>
 
             <div className="w-screen min-h-[300px] mt-10">
-                <div className="big-content w-full px-2 md:w-4/5  mx-auto">
+                <div className="big-content w-full px-2 md:w-4/5 mx-auto">
                     {/* menu */}
                     <div className="breadcrumbs">
                         <ul className="flex items-center gap-2">
-                            <Link to={"/"}>
-                                <li className="underline underline-offset-4 hover:text-[#17c6aa] ">
-                                  Trang Chủ
-                                </li>
+                            <Link to={'/'}>
+                                <li className="underline underline-offset-4 hover:text-[#17c6aa] ">Trang Chủ</li>
                             </Link>
-                            <li className="underline underline-offset-4 hover:text-[#17c6aa] ">
-                            </li>
+                            <li className="underline underline-offset-4 hover:text-[#17c6aa] "></li>
                             <li>/ {product?.product.categoryId}</li>
                             <li>/ {product?.product.name}</li>
                         </ul>
@@ -48,18 +45,17 @@ const Detail_Product = () => {
 
                     <div className="slider-text-content min-w-full  flex flex-col gap-5 mt-8 md:mt-10 md:flex-row justify-between  ">
                         {/* slider */}
-                        <div className="slider w-full md:w-1/5 relative overflow-hidden ">
-                        <td className="whitespace-nowrap  text-gray-700 py-4 ">
-            <div className="items-center ">
-                <p className="text-xs lg:text-base md:text-xl flex ">
-                   <ImagePriview width={1000} listImage={product?.product.image} />
-                </p>
-            </div>
-        </td>
+                        <div className="slider w-full md:w-2/5 relative overflow-hidden ">
+                            <td className="whitespace-nowrap  text-gray-700 py-4 ">
+                                <div className="items-center ">
+                                    <p className="text-xs lg:text-base md:text-xl flex ">
+                                        <ImagePriview width={1000} listImage={product?.product.image} />
+                                    </p>
+                                </div>
+                            </td>
 
                             {/* sale */}
                             <div className="prd-sale absolute top-2 left-1 min-w-[75px]">
-
                                 <div className=" py-[2px] bg-pink-600 my-1">
                                     <span className=" m-2 block  rounded-full text-center text-sm font-medium text-white">
                                         {product?.product.sale} %
@@ -67,11 +63,10 @@ const Detail_Product = () => {
                                 </div>
                                 <div className="prd-sale py-[2px] bg-blue-300">
                                     <span className=" m-2 block  rounded-full text-center text-sm font-medium text-white">
-                                      Mới
+                                        Mới
                                     </span>
                                 </div>
                             </div>
-
                         </div>
                         {/* content */}
                         <div className="text-content flex-1">
@@ -89,8 +84,8 @@ const Detail_Product = () => {
                             <div className="info-desc mt-5">
                                 <h2 className="text-lg font-medium">Thông tin sản phẩm</h2>
                                 <p className="break-words mt-3 text-base text-[#282828]">
-                                {product?.product.description}
-                                   
+                                    {product?.product.description}
+
                                 </p>
                             </div>
                             <hr className="bg-gray-300 h-1 mx-auto my-20" />
@@ -121,11 +116,6 @@ const Detail_Product = () => {
                                                 )
                                             )}
                                         </select>
-                                        <li className="rounded-md cursor-pointer  py-1 ">
-                                            <span className="active-bg-size hover:bg-black px-1 py-2 hover:text-white  rounded-md">
-                                                Size
-                                            </span>
-                                        </li>
                                     </ul>
                                 </div>
                                 {/* quantity by size */}
@@ -142,7 +132,7 @@ const Detail_Product = () => {
                                                     className="w-12 text-center border-x-2" defaultValue={product?.product.quantity} />
                                                 <button className="btn-plus px-2">+</button>
                                             </div>
-                                           
+
                                         </div>
 
                                     </ul>
@@ -152,7 +142,7 @@ const Detail_Product = () => {
                                     {/* button */}
                                     <div className="button flex items-center gap-4 mt-5">
                                         <button className="btn-addtocart flex-1 bg-[#17c6aa] text-white hover:bg-black py-4 rounded-md">
-                                           Thêm Vào Giỏ Hàng
+                                            Thêm Vào Giỏ Hàng
                                         </button>
                                     </div>
                                 </div>
@@ -162,7 +152,7 @@ const Detail_Product = () => {
 
                     {/* mô tả và support */}
                     <div className="desc-support">
-                        <div className="info-support flex flex-col gap-10 md:flex-row justify-between items-center bg-gray-100 py-2 px-1 mt-8 md:mt-20">
+                        <div className="info-support flex flex-col gap-10 md:flex-row justify-between items-center bg-white  py-2 px-1 mt-8 md:mt-20">
                             <div className="item flex items-center ">
                                 <i className="text-4xl">
                                     <FcConferenceCall />
@@ -182,11 +172,11 @@ const Detail_Product = () => {
                         {/* Mô tả */}
                         <div className="info-desc mt-8 md:mt-20">
                             <h1 className="underline underline-offset-8 text-xl font-semibold my-10">
-                              Chính Sách Mua Hàng
+                                Chính Sách Mua Hàng
                             </h1>
                             <div className="desc flex flex-col-reverse md:flex-row items-start gap-5">
                                 <p className="mb-5 w-2/3 text-base leading-7 ">
-                                ✨Hàng trong kho toàn bộ là hàng có sẵn. Các bạn đặt hàng chọn theo phân loại hàng mình mua là được nhé<br></br>
+                                    ✨Hàng trong kho toàn bộ là hàng có sẵn. Các bạn đặt hàng chọn theo phân loại hàng mình mua là được nhé<br></br>
                                     ⚜️GIAO HÀNG TOÀN QUỐC SIÊU NHANH<br></br>
                                     ⚜️Thanh toán khi nhận hàng<br></br>
                                     🔸Cam kết giá cả cạnh tranh, mẫu mã đa dạng<br></br>
@@ -204,7 +194,7 @@ const Detail_Product = () => {
                     {/* Sản phẩm cùng loại */}
                     <div className="prd-cate mt-8 md:mt-10">
                         <h1 className="text-center text-3xl font-medium my-5">
-                          Sản Phẩm Cùng Loại
+                            Sản Phẩm Cùng Loại
                         </h1>
                         {/* <Item /> */}
                     </div>

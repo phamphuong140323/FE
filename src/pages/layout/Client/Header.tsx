@@ -45,9 +45,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="Header fixed z-40 shadow-2xl pt-1">
-        <header className="min-h-[100px] bg-gray-100 ">
-          <div className="content-header min-h-[100px] py-2 flex flex-col md:flex-row items-center justify-evenly mx-10">
+      <div className=" fixed z-40  pt-1 ">
+        <header className="min-h-[100px] bg-white w-screen ">
+          <div className="content-header py-2 flex md:flex-row items-center mx-10">
             <div className="w-20 h-20 ">
               <Link to={"/"}>
                 {informationData?.data?.map((information: IInformation) => (
@@ -77,12 +77,12 @@ const Header = () => {
             <div className="w-full md:w-80 ">
               <form
                 onSubmit={onSubmitSearch}
-                className={`search-header relative ml-auto  w-50 focus-within:w-80  h-10 border border-teal-700 bg-gray-300 group  flex items-center justify-around pl-2 rounded-3xl ${
+                className={`search-header relative ml-auto  w-50 focus-within:w-80 border  h-10  group  flex items-center justify-around pl-2 rounded-3xl ${
                   valueSearch.length > 0 ? "w-80" : ""
                 }`}
               >
                 <input
-                  className="inp-search w-5/6 text-sm  caret-teal-400  h-6 outline-none bg-gray-300   pl-2 pr-7"
+                  className="inp-search w-5/6 text-sm  caret-teal-400  h-6 outline-none    pl-2 pr-7"
                   type="text"
                   name=""
                   id=""
@@ -97,7 +97,7 @@ const Header = () => {
                     onClick={hanldClear}
                     className="absolute clears cursor-pointer  right-[50px] top-1/2 translate-y-[-50%]"
                   >
-                    <TiDelete className="text-xl text-teal-400" />
+                    <TiDelete className="text-xl text-black" />
                   </span>
                 }
                 <button className="mx-1">
@@ -105,11 +105,11 @@ const Header = () => {
                 </button>
               </form>
             </div>
-            <div className="action-cart-heart md:flex items-center gap-10 hidden mx-6">
-              <div className="heart-header">
+            <div className="action-cart-heart md:flex items-center gap-10 hidden ">
+              <div className="heart-header mx-5">
                 <Link title="Cart" className="" to={"/cart"}>
                   <i className="relative">
-                    <BsFillBagCheckFill className="heart-icon text-teal-400 text-3xl" />
+                    <BsFillBagCheckFill className="heart-icon text-black text-3xl" />
                     <div className="quatity-producst  -top-2 ml-6 absolute">
                       <span className="bg-red-500 text-white rounded-full text-xs px-1 py-[2px]">
                         99+
@@ -121,7 +121,7 @@ const Header = () => {
               <div className="heart-header">
                 <Link title="Cart" className="" to={"/cart"}>
                   <i className="relative">
-                    <BsHeart className="heart-icon text-teal-400 text-3xl" />
+                    <BsHeart className="heart-icon text-black text-3xl" />
                     <div className="quatity-producst  -top-2 ml-6 absolute">
                       <span className="bg-red-500 text-white rounded-full text-xs px-1 py-[2px]">
                         99+

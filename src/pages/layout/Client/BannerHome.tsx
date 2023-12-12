@@ -17,12 +17,13 @@ const BannerHome = () => {
       slidesToScroll={1}
       autoplay={true}
       autoplaySpeed={2000}
+      arrows= {false}
     >
       {images.map((image, index) => (
-       <div>
+       <div className='w-screen'>
          <div
           key={index}
-          className="relative bg-cover bg-center bg-no-repeat pt-10 "
+          className="relative bg-cover bg-center bg-no-repeat  "
           style={{ backgroundImage: `url('${image}')` }}
         >
           <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-96 lg:items-center lg:px-48 lg:justify-end">
